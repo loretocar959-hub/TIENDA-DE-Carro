@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> DE LORETO Luxury Motors Elite Corp. | E-Commerce & Alquiler de Vehículos Premium</title>
+
+    <!-- Bootstrap 5.3.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome 6.5.1 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts: Montserrat & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <!-- Estilos Personalizados -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- NAVEGACIÓN FIJA GLASSMORPHISM -->
+    <header class="sticky-top glass-navbar">
+        <nav class="navbar navbar-expand-lg py-2">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="#top">
+                    <span class="brand-icon-box"><i class="fas fa-car-side"></i></span>
+                    <div>
+                        <span class="brand-title"> DE LORETOLUXURY MOTORS</span>
+                        <span class="brand-subtitle d-block"> DELORETOELITE CORP.</span>
+                    </div>
+                </a>
+
+                <button class="navbar-toggler border-info" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Alternar navegación">
+          <i class="fas fa-bars text-info"></i>
+        </button>
+
+                <div class="collapse navbar-collapse gap-3 mt-2 mt-lg-0" id="navbarContent">
+                    <!-- Pestañas de Categoría -->
+                    <ul class="nav nav-pills elite-tabs mx-auto" id="categoryTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" data-category="todos" type="button">
+                <i class="fas fa-gem me-1"></i> Todos
+              </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-category="vehiculos" type="button">
+                <i class="fas fa-car me-1"></i> Vehículos
+              </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-category="motos" type="button">
+                <i class="fas fa-motorcycle me-1"></i> Motocicletas
+              </button>
+                        </li>
+                    </ul>
+
+                    <!-- Buscador en Tiempo Real -->
+                    <div class="search-wrapper position-relative">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="searchInput" class="form-control elite-search-input" placeholder="Buscar marca, modelo o motor..." autocomplete="off">
+                        <button type="button" id="clearSearchBtn" class="btn-clear-search d-none" title="Limpiar búsqueda">
+              <i class="fas fa-times"></i>
+            </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main id="top">
+        <!-- HERO BANNER -->
+        <section class="hero-banner text-center">
+            <div class="hero-overlay"></div>
+            <div class="container position-relative z-2 py-5">
+                <img src="assets/logo_pagina.png" alt="Luxury Motors Elite Corp." class="hero-logo mb-3" onerror="this.src=window.PDF_THUMBNAILS['assets/logo_pagina.png']">
+                <div class="mb-2">
+                    <span class="badge-vip"><i class="fas fa-crown me-1"></i> CONCESIONARIO INTERNACIONAL CERTIFICADO</span>
+                </div>
+                <h1 class="hero-title">CATÁLOGO PREMIUM</h1>
+                <p class="hero-description mx-auto">
+                    Adquisición inmediata y arrendamiento ejecutivo de superdeportivos, SUVs de ultra lujo y superbikes de edición limitada. Facturación comercial instantánea y contratos legales automatizados.
+                </p>
+                <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+                    <a href="#catalogo-section" class="btn btn-elite-primary">
+                        <i class="fas fa-compass me-2"></i> Explorar Flota Exclusiva
+                    </a>
+                    <button type="button" class="btn btn-elite-outline" data-bs-toggle="modal" data-bs-target="#cartModal">
+            <i class="fas fa-file-invoice-dollar me-2"></i> Revisar Orden (<span id="heroCartCount">0</span>)
+          </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE CATÁLOGO -->
+        <section id="catalogo-section" class="container py-5">
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 pb-3 border-bottom border-secondary">
+                <div>
+                    <h2 class="section-heading mb-1"><i class="fas fa-tachometer-alt me-2"></i>FLOTA DISPONIBLE EN INVENTARIO</h2>
+                    <p class="section-subtext mb-0">Todas las unidades cuentan con certificación mecánica de 150 puntos y entrega VIP.</p>
+                </div>
+                <div class="mt-2 mt-md-0">
+                    <span class="inventory-counter" id="inventoryCounter">Cargando unidades...</span>
+                </div>
+            </div>
+
+            <!-- Grid Dinámico de Tarjetas -->
+            <div class="row g-4" id="catalogGrid"></div>
+
+            <!-- Estado Sin Resultados -->
+            <div id="emptyState" class="empty-state-box text-center py-5 d-none">
+                <i class="fas fa-car-crash fa-3x text-info mb-3"></i>
+                <h3 class="text-white fw-bold">No se encontraron unidades con ese criterio</h3>
+                <p class="text-light">Intenta buscar por otra marca (Ferrari, Lamborghini, Ducati) o restablece los filtros.</p>
+                <button type="button" id="resetFiltersBtn" class="btn btn-elite-primary mt-2">
+          <i class="fas fa-sync-alt me-2"></i> Mostrar Toda la Flota
+        </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- BOTÓN FLOTANTE DEL CARRITO -->
+    <button type="button" class="floating-cart-btn" data-bs-toggle="modal" data-bs-target="#cartModal" aria-label="Abrir carrito de compras">
+    <i class="fas fa-shopping-bag"></i>
+    <span class="cart-badge-count" id="floatingCartBadge">0</span>
+  </button>
+
+    <!-- =========================================================================
+       MODAL 1: CONFIGURACIÓN DE ALQUILER EJECUTIVO
+       ========================================================================= -->
+    <div class="modal fade" id="rentalModal" tabindex="-1" aria-labelledby="rentalModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content elite-modal">
+                <div class="modal-header border-bottom border-info">
+                    <h5 class="modal-title fw-bold text-info" id="rentalModalLabel">
+                        <i class="fas fa-key me-2"></i>RESERVA DE ALQUILER EJECUTIVO
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="row g-4 align-items-center">
+                        <!-- Vista Previa Unidad -->
+                        <div class="col-md-5 text-center">
+                            <div class="rental-preview-card p-3">
+                                <img id="rentalVehicleImg" src="" alt="Vehículo" class="img-fluid rounded mb-3 rental-modal-img">
+                                <span class="badge bg-info text-dark fw-bold mb-1" id="rentalVehicleCategory">DEPORTIVO</span>
+                                <h5 class="text-white fw-bold mb-1" id="rentalVehicleName">Marca Modelo</h5>
+                                <p class="small text-info mb-2" id="rentalVehicleCode">Código: #000</p>
+                                <div class="d-flex justify-content-around pt-2 border-top border-secondary">
+                                    <div>
+                                        <small class="d-block text-light">Tarifa Día</small>
+                                        <strong class="text-warning" id="rentalRateDayDisplay">$0</strong>
+                                    </div>
+                                    <div>
+                                        <small class="d-block text-light">Tarifa Hora</small>
+                                        <strong class="text-orange" id="rentalRateHourDisplay">$0</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Controles de Reserva -->
+                        <div class="col-md-7">
+                            <form id="rentalConfigForm">
+                                <input type="hidden" id="rentalVehicleId">
+
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold text-white">1. Modalidad de Arrendamiento:</label>
+                                    <div class="row g-2">
+                                        <div class="col-6">
+                                            <input type="radio" class="btn-check" name="rentalMode" id="modeDia" value="Día(s)" checked>
+                                            <label class="btn btn-outline-info w-100 fw-bold" for="modeDia">
+                        <i class="fas fa-calendar-day me-1"></i> Por Día(s) (24h)
+                      </label>
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="radio" class="btn-check" name="rentalMode" id="modeHora" value="Hora(s)">
+                                            <label class="btn btn-outline-info w-100 fw-bold" for="modeHora">
+                        <i class="fas fa-clock me-1"></i> Por Hora(s)
+                      </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row g-3 mb-3">
+                                    <div class="col-sm-6">
+                                        <label for="rentalDurationInput" class="form-label fw-bold text-white" id="rentalDurationLabel">Cantidad de Días:</label>
+                                        <input type="number" class="form-control elite-input" id="rentalDurationInput" min="1" max="60" value="3" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="rentalStartDate" class="form-label fw-bold text-white">Fecha de Entrega:</label>
+                                        <input type="date" class="form-control elite-input" id="rentalStartDate" value="2026-10-27" required>
+                                    </div>
+                                </div>
+
+                                <!-- Cálculo Reactivo en Tiempo Real -->
+                                <div class="elite-summary-box p-3 mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span class="text-white">Tarifa Unitaria Aplicada:</span>
+                                        <strong class="text-info" id="calcUnitRate">$0.00</strong>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span class="text-white">Duración Seleccionada:</span>
+                                        <strong class="text-white" id="calcDurationText">3 Día(s)</strong>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="text-white">Depósito de Fianza Reembolsable:</span>
+                                        <strong class="text-warning">$500.00 USD</strong>
+                                    </div>
+                                    <div class="d-flex justify-content-between pt-2 border-top border-info">
+                                        <span class="fw-bold text-white">Subtotal Estimado Alquiler:</span>
+                                        <span class="fw-bold fs-5 text-orange" id="calcRentalSubtotal">$0.00</span>
+                                    </div>
+                                </div>
+
+                                <!-- Aviso de Términos -->
+                                <div class="elite-alert-dark p-2 small">
+                                    <i class="fas fa-shield-alt text-info me-1"></i>
+                                    <span class="text-white">Incluye <strong>Póliza Platinum</strong> (deducible 10%), tanque lleno 100% y emisión automática de <strong>Contrato Oficial con firmas legales</strong>.</span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-top border-secondary">
+                    <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id="confirmAddRentalBtn" class="btn btn-elite-orange fw-bold px-4">
+            <i class="fas fa-cart-plus me-2"></i> Agregar Alquiler al Carrito
+          </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================================
+       MODAL 2: CARRITO DE COMPRAS Y RESERVAS
+       ========================================================================= -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content elite-modal">
+                <div class="modal-header border-bottom border-info">
+                    <h5 class="modal-title fw-bold text-info" id="cartModalLabel">
+                        <i class="fas fa-shopping-bag me-2"></i>RESUMEN DE ORDEN & RESERVAS VIP
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div id="cartItemsContainer"></div>
+                </div>
+                <div class="modal-footer border-top border-secondary d-flex flex-wrap justify-content-between align-items-center gap-3">
+                    <button type="button" id="clearCartBtn" class="btn btn-outline-danger">
+            <i class="fas fa-trash-alt me-1"></i> Vaciar Orden
+          </button>
+                    <div class="d-flex flex-wrap align-items-center gap-3">
+                        <div class="text-end">
+                            <small class="d-block text-white">Total General a Procesar:</small>
+                            <span class="fs-4 fw-bold text-warning" id="cartModalTotalDisplay">$0.00 USD</span>
+                        </div>
+                        <button type="button" id="proceedToCheckoutBtn" class="btn btn-elite-primary btn-lg fw-bold">
+              <i class="fas fa-lock me-2"></i> Proceder al Pago & Facturación PDF
+            </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================================
+       MODAL 3: PASARELA DE PAGO VIP & GENERADOR OFICIAL DE PDF
+       ========================================================================= -->
+    <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content elite-modal">
+                <div class="modal-header border-bottom border-warning">
+                    <h5 class="modal-title fw-bold text-warning" id="checkoutModalLabel">
+                        <i class="fas fa-shield-alt me-2"></i>PASARELA DE PAGO BLINDADA & EMISIÓN DOCUMENTAL
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <!-- Botón 1-Click Datos Ficticios -->
+                    <div class="d-flex flex-wrap justify-content-between align-items-center elite-alert-dark p-3 mb-4 gap-2">
+                        <div>
+                            <strong class="text-info d-block"><i class="fas fa-bolt me-1"></i> Modo Evaluación Rápida Activado</strong>
+                            <span class="text-white small">Los datos del cliente VIP ya están pre-cargados. Puedes editarlos o restaurarlos con un clic.</span>
+                        </div>
+                        <button type="button" id="fillDemoDataBtn" class="btn btn-outline-info btn-sm fw-bold">
+              ⚡ Rellenar Datos Ficticios de Prueba (Demo VIP)
+            </button>
+                    </div>
+
+                    <form id="checkoutForm">
+                        <div class="row g-4">
+                            <!-- Columna Datos del Cliente -->
+                            <div class="col-lg-7">
+                                <h6 class="text-info fw-bold text-uppercase mb-3 border-bottom border-secondary pb-2">
+                                    <i class="fas fa-user-tie me-2"></i>1. Datos Legales del Comprador / Arrendatario
+                                </h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="clientName" class="form-label text-white fw-semibold">Nombre y Apellidos *</label>
+                                        <input type="text" class="form-control elite-input" id="clientName" value="Ing. Juancito Peña Vizcaíno" placeholder="Ej: Ing. Juancito Peña Vizcaíno" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="clientId" class="form-label text-white fw-semibold">Documento / Cédula *</label>
+                                        <input type="text" class="form-control elite-input" id="clientId" value="001-1234567-8" placeholder="Ej: 001-1234567-8" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="clientLicense" class="form-label text-white fw-semibold">Licencia de Conducir (Alquileres) *</label>
+                                        <input type="text" class="form-control elite-input" id="clientLicense" value="DO-8874125-VIP (Vigente)" placeholder="Ej: DO-8874125-VIP (Vigente)" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="clientPhone" class="form-label text-white fw-semibold">Teléfono de Contacto *</label>
+                                        <input type="tel" class="form-control elite-input" id="clientPhone" value="+1 (809) 555-0199" placeholder="Ej: +1 (809) 555-0199" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="clientEmail" class="form-label text-white fw-semibold">Correo Electrónico Corporativo *</label>
+                                        <input type="email" class="form-control elite-input" id="clientEmail" value="juancito.pena@luxurymotors.com" placeholder="Ej: juancito.pena@luxurymotors.com" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="clientAddress" class="form-label text-white fw-semibold">Dirección de Entrega VIP *</label>
+                                        <input type="text" class="form-control elite-input" id="clientAddress" value="Av. Anacaona #105, Torre Bella Vista, Santo Domingo, D.N." placeholder="Ej: Av. Anacaona #105, Santo Domingo" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Columna Pago y Resumen -->
+                            <div class="col-lg-5">
+                                <h6 class="text-warning fw-bold text-uppercase mb-3 border-bottom border-secondary pb-2">
+                                    <i class="fas fa-credit-card me-2"></i>2. Método de Pago Corporativo
+                                </h6>
+                                <div class="elite-summary-box p-3 mb-3">
+                                    <div class="mb-3">
+                                        <label for="cardNumber" class="form-label text-white fw-semibold">Número de Tarjeta Simulada *</label>
+                                        <input type="text" class="form-control elite-input" id="cardNumber" value="4532 8901 2345 8899" placeholder="Ej: 4532 8901 2345 8899" required>
+                                    </div>
+                                    <div class="row g-2">
+                                        <div class="col-6">
+                                            <label for="cardExpiry" class="form-label text-white fw-semibold">Vencimiento *</label>
+                                            <input type="text" class="form-control elite-input" id="cardExpiry" value="12/28" placeholder="MM/AA" required>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="cardCvv" class="form-label text-white fw-semibold">Código CVV *</label>
+                                            <input type="text" class="form-control elite-input" id="cardCvv" value="789" placeholder="789" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Bloque Blindado de Resumen Final (Cero clases .alert claras de Bootstrap) -->
+                                <div class="elite-secure-box p-3">
+                                    <div class="d-flex align-items-center gap-2 mb-2">
+                                        <i class="fas fa-lock text-info fs-5"></i>
+                                        <strong class="text-info">Transacción Cifrada y Blindada</strong>
+                                    </div>
+                                    <div class="d-flex justify-content-between text-white small mb-1">
+                                        <span>Documento a emitir:</span>
+                                        <strong class="text-info" id="checkoutDocTypeLabel">Factura / Contrato PDF</strong>
+                                    </div>
+                                    <div class="d-flex justify-content-between text-white small mb-2">
+                                        <span>Fianza de Garantía Reembolsable:</span>
+                                        <strong class="text-warning" id="checkoutDepositLabel">$0.00</strong>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center pt-2 border-top border-info">
+                                        <span class="text-white fw-bold">Monto Final a Procesar:</span>
+                                        <span class="fs-4 fw-bold text-warning" id="checkoutFinalAmount">$0.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer border-top border-secondary">
+                    <button type="button" class="btn btn-outline-light" data-bs-target="#cartModal" data-bs-toggle="modal">
+            <i class="fas fa-arrow-left me-1"></i> Volver al Carrito
+          </button>
+                    <button type="button" id="processPaymentAndPdfBtn" class="btn btn-elite-primary btn-lg fw-bold px-4">
+            <i class="fas fa-file-pdf me-2"></i> Confirmar Pago y Descargar PDF Oficial
+          </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================================
+       FOOTER OFICIAL DEL ARQUITECTO (LITERAL Y OBLIGATORIO)
+       ========================================================================= -->
+    <style>
+        footer {
+            background: linear-gradient(135deg, #0a0a0a, #1c1c1c);
+            color: #fff;
+            padding: 50px 0 30px;
+            text-align: center;
+            margin-top: 20px;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        footer img.footer-avatar {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 4px solid #ffffff;
+            margin-bottom: 20px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        footer img.footer-avatar:hover {
+            transform: scale(1.05);
+            border-color: #f8f9fa;
+        }
+        
+        footer h4 {
+            font-weight: 800;
+            color: #00bfff;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        footer p.bio {
+            font-size: 16px;
+            color: #ddd;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            line-height: 1.6;
+        }
+        
+        .tech-stack {
+            display: inline-block;
+            background: rgba(0, 191, 255, 0.1);
+            color: #00bfff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 13px;
+            margin: 4px;
+            border: 1px solid rgba(0, 191, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .tech-stack:hover {
+            background: rgba(0, 191, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .tech-stack i {
+            margin-right: 6px;
+            font-size: 15px;
+        }
+        
+        .keyword {
+            color: #00d2ff;
+            font-weight: bold;
+        }
+        
+        .keyword-ai {
+            color: #ff007f;
+            font-weight: bold;
+        }
+        
+        .social-icons-footer {
+            margin: 25px 0;
+        }
+        
+        .social-icons-footer a {
+            color: #fff;
+            font-size: 24px;
+            margin: 0 12px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .social-icons-footer a:hover {
+            color: #00bfff;
+            transform: translateY(-5px) scale(1.1);
+            text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+        }
+        
+        .btn-youtube {
+            background: linear-gradient(90deg, #ff0000, #cc0000);
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+        }
+        
+        .btn-youtube:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 0, 0, 0.5);
+        }
+    </style>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <img src="IMAGEN1.jfif" class="footer-avatar" alt="Ing. Juancito Peña">
+            <h4>Ing. loreto carrera</h4>
+            <p class="bio">
+                <span class="keyword">Desarrollador Full Stack</span>,
+                <span style="color: #00ff88; font-weight: bold;">Analista de Datos</span> y
+                <span style="color: #ff8800; font-weight: bold;">Científico de Datos</span>, además de <span class="keyword-ai">Docente universitario en tecnologías</span>. Apasionado por la innovación, la <span class="keyword-ai">Inteligencia Artificial</span>                y la educación digital.<br> 💡 Creador de contenido especializado en arquitectura de software, bases de datos avanzadas, análisis de datos y soluciones tecnológicas modernas.
+            </p>
+
+
+            <div class="mb-4">
+                <span class="tech-stack"><i class="fab fa-html5" style="color: #e34f26;"></i> HTML</span>
+                <span class="tech-stack"><i class="fab fa-css3-alt" style="color: #1572b6;"></i> CSS</span>
+                <span class="tech-stack"><i class="fab fa-js" style="color: #f7df1e;"></i> JS</span>
+                <span class="tech-stack"><i class="fab fa-bootstrap" style="color: #7952b3;"></i> Bootstrap</span>
+                <span class="tech-stack"><i class="fab fa-php" style="color: #777bb4;"></i> PHP</span>
+                <span class="tech-stack"><i class="fab fa-laravel" style="color: #ff2d20;"></i> Laravel</span>
+                <span class="tech-stack"><i class="fas fa-code"></i> C#</span>
+                <span class="tech-stack"><i class="fab fa-microsoft"></i> .NET MAUI</span>
+                <span class="tech-stack"><i class="fab fa-python" style="color: #3776ab;"></i> Python</span>
+                <span class="tech-stack"><i class="fas fa-database" style="color: #cc292b;"></i> SQL Server</span>
+                <span class="tech-stack"><i class="fas fa-file-excel" style="color: #1D6F42;"></i> Excel</span>
+                <span class="tech-stack"><i class="fas fa-chart-bar" style="color: #f2c811;"></i> Power BI</span>
+            </div>
+
+            <div class="social-icons-footer">
+                <a href="https://www.youtube.com/@JuancitoDevV" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://github.com/JUANCITOPENA" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/juancitope%C3%B1a/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/juancito.pena.v/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/juancito.p.v" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/JuancitoPenaV" target="_blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+            </div>
+
+            <button class="btn-youtube" onclick="window.open('https://www.youtube.com/@JuancitoDevV','_blank')">
+        🎥 Suscríbete a mi canal
+      </button>
+
+            <hr class="my-4" style="border-color:#333;">
+            <p class="mb-0" style="color: #888; font-size: 14px;">© 2026 Catálogo de Vehículos Premium | Arquitectura por <span style="color: #ccc; font-weight: bold;">Ing. Loreto Carrera</span></p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5.3.3 Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- html2pdf.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Miniaturas Base64 para PDF sin CORS -->
+    <script src="pdf_thumbnails.js"></script>
+    <!-- Lógica Principal SPA -->
+    <script src="app.js"></script>
+</body>
+
+</html>

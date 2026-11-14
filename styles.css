@@ -1,0 +1,568 @@
+/* ==========================================================================
+   LUXURY MOTORS ELITE CORP. - ESTILOS DE ALTA GAMA & CONTRASTE WCAG AAA
+   Nota: Prohibido usar selectores globales (p, span, label) con color blanco
+   para mantener aislamiento total en documentos PDF generados en cliente.
+   ========================================================================== */
+
+:root {
+    --bg-obsidian: #070b14;
+    --bg-card: #0e1525;
+    --bg-card-hover: #131d33;
+    --bg-panel: #0d121c;
+    --cyan-neon: #00d2ff;
+    --cyan-bright: #38bdf8;
+    --gold-vip: #ffd700;
+    --orange-fire: #ff9800;
+    --orange-deep: #ff6d00;
+    --text-snow: #f8fafc;
+    --border-glow: rgba(0, 210, 255, 0.35);
+}
+
+html,
+body {
+    background-color: var(--bg-obsidian);
+    color: var(--text-snow);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+
+/* ==========================================================================
+   NAVBAR GLASSMORPHISM FIJO
+   ========================================================================== */
+
+.glass-navbar {
+    background: rgba(7, 11, 20, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-glow);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65);
+    z-index: 1030;
+}
+
+.brand-icon-box {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #00bfff, #0066ff);
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+}
+
+.brand-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.15rem;
+    letter-spacing: 1px;
+    color: #ffffff;
+}
+
+.brand-subtitle {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    color: var(--gold-vip);
+}
+
+
+/* Pestañas de Categoría */
+
+.elite-tabs {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px;
+    border-radius: 50px;
+    border: 1px solid rgba(0, 210, 255, 0.25);
+}
+
+.elite-tabs .nav-link {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 50px;
+    padding: 6px 18px;
+    transition: all 0.25s ease;
+}
+
+.elite-tabs .nav-link:hover {
+    color: var(--cyan-neon);
+    background: rgba(0, 210, 255, 0.1);
+}
+
+.elite-tabs .nav-link.active {
+    background: linear-gradient(135deg, #00bfff, #0077ff);
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.45);
+}
+
+
+/* Buscador Tiempo Real */
+
+.search-wrapper {
+    min-width: 270px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--cyan-neon);
+    pointer-events: none;
+}
+
+.elite-search-input {
+    background-color: #0d1424;
+    border: 1px solid rgba(0, 210, 255, 0.4);
+    color: #ffffff;
+    border-radius: 50px;
+    padding-left: 38px;
+    padding-right: 34px;
+    font-size: 0.9rem;
+}
+
+.elite-search-input::placeholder {
+    color: #cbd5e1;
+}
+
+.elite-search-input:focus {
+    background-color: #111b30;
+    border-color: var(--cyan-neon);
+    color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.25);
+}
+
+.btn-clear-search {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: var(--orange-fire);
+    cursor: pointer;
+}
+
+
+/* ==========================================================================
+   HERO BANNER
+   ========================================================================== */
+
+.hero-banner {
+    position: relative;
+    background: radial-gradient(circle at top center, #13223f 0%, #070b14 75%);
+    border-bottom: 1px solid var(--border-glow);
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(0, 210, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 210, 255, 0.04) 1px, transparent 1px);
+    background-size: 36px 36px;
+    pointer-events: none;
+}
+
+.hero-logo {
+    max-height: 95px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 18px rgba(0, 210, 255, 0.45));
+}
+
+.badge-vip {
+    display: inline-block;
+    background: rgba(255, 215, 0, 0.14);
+    border: 1px solid var(--gold-vip);
+    color: var(--gold-vip);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    padding: 6px 16px;
+    border-radius: 50px;
+}
+
+.hero-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    letter-spacing: 2px;
+    color: var(--cyan-neon);
+    text-shadow: 0 0 28px rgba(0, 210, 255, 0.45);
+    margin: 10px 0;
+}
+
+.hero-description {
+    max-width: 740px;
+    font-size: 1.08rem;
+    color: #ffffff;
+    line-height: 1.65;
+}
+
+
+/* ==========================================================================
+   BOTONES CORPORATIVOS DE ALTO CONTRASTE
+   ========================================================================== */
+
+.btn-elite-primary {
+    background: linear-gradient(135deg, #00bfff, #0066ff);
+    color: #ffffff;
+    border: none;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 10px 22px;
+    box-shadow: 0 4px 18px rgba(0, 191, 255, 0.35);
+    transition: all 0.25s ease;
+}
+
+.btn-elite-primary:hover {
+    background: linear-gradient(135deg, #38bdf8, #0077ff);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 210, 255, 0.55);
+}
+
+.btn-elite-outline {
+    background: rgba(13, 18, 28, 0.85);
+    color: var(--gold-vip);
+    border: 1px solid var(--gold-vip);
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 10px 22px;
+    transition: all 0.25s ease;
+}
+
+.btn-elite-outline:hover {
+    background: var(--gold-vip);
+    color: #070b14;
+    transform: translateY(-2px);
+}
+
+.btn-elite-orange {
+    background: linear-gradient(135deg, #ff9800, #ff6d00);
+    color: #ffffff;
+    border: none;
+    font-weight: 700;
+    border-radius: 10px;
+    transition: all 0.25s ease;
+}
+
+.btn-elite-orange:hover {
+    background: linear-gradient(135deg, #ffa726, #ff8f00);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 109, 0, 0.45);
+}
+
+
+/* ==========================================================================
+   SECCIÓN CATÁLOGO & TARJETAS (CARDS)
+   ========================================================================== */
+
+.section-heading {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.55rem;
+    color: var(--cyan-neon);
+}
+
+.section-subtext {
+    color: #e2e8f0;
+    font-size: 0.95rem;
+}
+
+.inventory-counter {
+    display: inline-block;
+    background: var(--bg-panel);
+    border: 1px solid var(--cyan-neon);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.88rem;
+    padding: 6px 16px;
+    border-radius: 50px;
+}
+
+.vehicle-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(0, 210, 255, 0.25);
+    border-radius: 16px;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.32s ease, border-color 0.32s ease;
+}
+
+.vehicle-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--cyan-neon);
+    box-shadow: 0 14px 36px rgba(0, 210, 255, 0.28);
+    background: var(--bg-card-hover);
+}
+
+.card-img-container {
+    position: relative;
+    height: 215px;
+    overflow: hidden;
+    background: #060911;
+}
+
+.card-vehicle-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.55s ease;
+}
+
+.vehicle-card:hover .card-vehicle-img {
+    transform: scale(1.08);
+}
+
+.promo-badge-floating {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: linear-gradient(135deg, #ff6d00, #ff9800);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 5px 12px;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    z-index: 2;
+}
+
+.type-badge-floating {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(7, 11, 20, 0.88);
+    border: 1px solid var(--cyan-neon);
+    color: var(--cyan-neon);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    z-index: 2;
+}
+
+.brand-logo-mini {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    background: #ffffff;
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.card-vehicle-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.12rem;
+    color: var(--cyan-neon);
+    margin-bottom: 2px;
+}
+
+.card-vehicle-code {
+    font-size: 0.78rem;
+    color: #cbd5e1;
+    font-weight: 600;
+}
+
+.card-vehicle-desc {
+    font-size: 0.86rem;
+    color: #f1f5f9;
+    line-height: 1.45;
+}
+
+.specs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    background: rgba(7, 11, 20, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 0.8rem;
+    color: #ffffff;
+}
+
+.spec-item i {
+    color: var(--cyan-bright);
+    width: 16px;
+    text-align: center;
+    margin-right: 5px;
+}
+
+.pricing-panel {
+    background: #090e1a;
+    border: 1px solid rgba(0, 210, 255, 0.22);
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-top: auto;
+}
+
+.price-sale-value {
+    color: var(--gold-vip);
+    font-weight: 800;
+    font-size: 1.08rem;
+}
+
+.price-rent-day {
+    color: var(--orange-fire);
+    font-weight: 800;
+    font-size: 0.96rem;
+}
+
+.price-rent-hour {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.84rem;
+}
+
+.text-orange {
+    color: var(--orange-fire);
+}
+
+
+/* ==========================================================================
+   BOTÓN FLOTANTE DEL CARRITO
+   ========================================================================== */
+
+.floating-cart-btn {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00bfff, #0066ff);
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 28px rgba(0, 191, 255, 0.55);
+    z-index: 1040;
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.floating-cart-btn:hover {
+    transform: scale(1.12) rotate(12deg);
+    box-shadow: 0 12px 35px rgba(0, 210, 255, 0.8);
+}
+
+.cart-badge-count {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: var(--orange-deep);
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    font-size: 0.8rem;
+    font-weight: 800;
+    min-width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ==========================================================================
+   MODALES & CONTENEDORES OSCUROS BLINDADOS (CERO FONDOS CLAROS DE BOOTSTRAP)
+   ========================================================================== */
+
+.elite-modal {
+    background-color: #0b101b;
+    color: #ffffff;
+    border: 1px solid var(--cyan-neon);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
+}
+
+.rental-preview-card,
+.elite-summary-box,
+.elite-alert-dark,
+.elite-secure-box,
+.empty-state-box,
+.cart-item-row {
+    background-color: #0d121c;
+    border: 1px solid var(--cyan-neon);
+    border-radius: 12px;
+    color: #ffffff;
+}
+
+.elite-secure-box {
+    background: linear-gradient(145deg, #0d121c, #111a2e);
+    border: 1px solid var(--gold-vip);
+}
+
+.rental-modal-img {
+    max-height: 155px;
+    width: 100%;
+    object-fit: cover;
+    border: 1px solid rgba(0, 210, 255, 0.35);
+}
+
+.elite-input {
+    background-color: #111827;
+    border: 1px solid rgba(0, 210, 255, 0.45);
+    color: #ffffff;
+}
+
+.elite-input::placeholder {
+    color: #cbd5e1;
+}
+
+.elite-input:focus {
+    background-color: #162033;
+    border-color: var(--cyan-neon);
+    color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.25);
+}
+
+
+/* Tablas Oscuras Personalizadas en Carrito */
+
+.elite-cart-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    color: #ffffff;
+}
+
+.elite-cart-table thead th {
+    background-color: #111a2e;
+    color: var(--cyan-neon);
+    padding: 10px 12px;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    border-top: 1px solid rgba(0, 210, 255, 0.3);
+    border-bottom: 1px solid rgba(0, 210, 255, 0.3);
+}
+
+.elite-cart-table tbody td {
+    background-color: #0d121c;
+    color: #ffffff;
+    padding: 12px;
+    vertical-align: middle;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cart-thumb-img {
+    width: 68px;
+    height: 46px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid var(--cyan-neon);
+}
